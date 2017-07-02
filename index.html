@@ -1,0 +1,101 @@
+<!Doctype html>
+<html ng-app="app">
+<head>
+  <!-- to ensure proper rendering and zooming-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fantasy Login</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Compiled and minified jquery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <!-- COmpiled jquery -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- CDN for minified angular js 1.6-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js'></script>
+  <!-- Font for the website-->
+  <link href="https://fonts.googleapis.com/css?family=Dosis:300,400|Fresca|Neuton:800|Paytone+One" rel="stylesheet">
+  <!-- CSS for login page-->
+  <link href='CSS/Login.css' rel='stylesheet'>
+  <script src='JS/app.js'></script>
+</head>
+<body class='Background'>
+  <div class='container' ng-controller='Login-Controller'>
+    <div class='row Login-div'>
+      <div class="col-md-7 col8">
+        <img src="cover.png" alt="cover">
+      </div>
+      <div ng-if=kickoffLogin>
+        <div class="col-md-4">
+            <form name='loginForm'>
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class='form-control' name="username" id="username" ng-model=username required>
+                  <span class='spanError' ng-show='loginForm.username.$touched && loginForm.username.$invalid'>Please enter username</span>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" class='form-control' name="password" id="password" ng-model=password required>
+                  <span class='spanError' ng-show='loginForm.password.$touched && loginForm.password.$invalid'>Please enter password</span>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                      <button type="submit" class='btn btn-default' name="Login">Login</button>
+                  </div>
+                  <div class="col-md-4">
+                      <a href="#" ng-click='Signup()'><i><strong>Yet to Kick-Off?</strong></i></a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class='btn btn-default signup-facebook' name="SignUpWithFacebook">Sign Up with Facebook</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-3 col-md-8">
+                    <button type="button" class='btn btn-default signup-google' name="SignUpWithGoogle">Sign Up with Google</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+      </div>
+      <div ng-if=kickoffSignup>
+        <div class="col-md-4">
+          <form name='signupForm'>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input type="text" class='form-control' name="username" id="username" ng-model='username' ng-blur='validate(username)' required>
+                  <span class='spanError' ng-show='signupForm.username.$touched && signupForm.username.$invalid'>Please enter username</span>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input type="password" class='form-control' name="password" id="password" ng-model='password' ng-blur='validate(password)' required>
+                  <span class='spanError' ng-show='signupForm.password.$touched && signupForm.password.$invalid'>Please enter password</span>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm Password:</label>
+                  <input type="password" class='form-control' name="confirmPassword" id="confirmPassword" ng-model='confirmPassword' ng-blur='validate(confirmPassword)' required>
+                  <span class='spanError' ng-show='signupForm.confirmPassword.$touched && signupForm.confirmPassword.$invalid'>Please enter your password again</span>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" name="email" class="form-control" id='email' ng-model='email' ng-blur='validate(email)' required>
+                  <span class='spanError' ng-show='signupForm.email.$touched && signupForm.email.$invalid'>Please enter email address</span>
+                </div>
+                <div class="form-group">
+                  <label for="DOB">Date Of Birth:</label>
+                  <input type="date" name="DOB" class='form-control' id="DOB" ng-model='DOB' ng-blur='validate(DOB)' required>
+                  <span class='spanError' ng-show='signupForm.DOB.$touched && signupForm.DOB.$invalid'>Please set your DOB</span>
+                </div>
+                <input type="submit" class='btn btn-default' disabled name="Kickoff"  value='Kickoff' ng-click='Signup()'>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Dosis', sans-serif;
+}
+
+.Login-div {
+      margin-top: 100px;
+}
+
+.Background {
+  background-image: url('messi.jpg');
+}
+
+.signup-facebook,.signup-google {
+  width: 150px;
+  margin-top: 5px;
+  border-radius: 30px;
+}
+
+.ng-touched.ng-invalid {
+  border:1px solid red;
+}
+
+.spanError {
+  color: #a8abab;
+  float:right;
+}
