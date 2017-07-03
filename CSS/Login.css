@@ -9,18 +9,38 @@
       background-color: #cbcaca;
 }
 
-.loginForm,.signupForm{
-  margin-top: 12px;
-}
-
-.Background {
-  background-image: url('messi.jpg');
+.loginForm-class,.signupForm-class{
+  margin-top: 20px;
 }
 
 .signup-facebook,.signup-google {
   width: 150px;
   margin-top: 5px;
   border-radius: 30px;
+}
+
+button[id='login-button']{
+  width: 60px;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+button[id='login-button']:hover{
+  width: 60px;
+  border-radius: 30px;
+  transform: translateX(5px);
+}
+
+input[id='kickoff']{
+  width: 60px;
+  border-radius: 30px;
+  transition: 0.4s;
+}
+
+input[id='kickoff']:hover{
+  width: 60px;
+  border-radius: 30px;
+  transform: translateX(5px);
 }
 
 .ng-touched.ng-invalid {
@@ -78,3 +98,4 @@ button[id='googleSignup']:hover{
 .green{
   color:green;
 }
+
