@@ -73,3 +73,7 @@ app.controller('Login-Controller',function($scope,$rootScope){
      
   }
 });
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
