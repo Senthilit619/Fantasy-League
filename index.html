@@ -24,11 +24,11 @@
 <body class='Background'>
   <div class='container' ng-controller='Login-Controller'>
     <div class='row Login-div'>
-      <div class="col-md-7 col8">
+      <div class="col-md-8 col8">
         <img src="cover.png" alt="cover">
       </div>
       <div ng-if=kickoffLogin>
-        <div class="col-md-4">
+        <div class="col-md-4 loginForm">
             <form name='loginForm'>
                 <div class="form-group">
                   <label for="username">Username:</label>
@@ -41,28 +41,28 @@
                   <span class='spanError' ng-show='loginForm.password.$touched && loginForm.password.$invalid'>Please enter password</span>
                 </div>
                 <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-7">
                       <button type="submit" class='btn btn-default' name="Login">Login</button>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-5">
                       <a href="#" ng-click='Signup()'><i><strong>Yet to Kick-Off?</strong></i></a>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-offset-3 col-md-8">
-                    <button type="button" class='btn btn-default signup-facebook' name="SignUpWithFacebook">Sign Up with Facebook</button>
+                    <button type="button" id='facebookSignup' class='btn btn-default signup-facebook' name="SignUpWithFacebook">Sign Up with Facebook</button>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-offset-3 col-md-8">
-                    <button type="button" class='btn btn-default signup-google' name="SignUpWithGoogle">Sign Up with Google</button>
+                    <button type="button" id='googleSignup' class='btn btn-default signup-google' name="SignUpWithGoogle">Sign Up with Google</button>
                   </div>
                 </div>
             </form>
         </div>
       </div>
       <div ng-if=kickoffSignup>
-        <div class="col-md-4">
+        <div class="col-md-4 signupForm">
           <form name='signupForm'>
               <div class="form-group">
                 <div class="form-group">
@@ -71,8 +71,16 @@
                   <span class='spanError' ng-show='signupForm.username.$touched && signupForm.username.$invalid'>Please enter username</span>
                 </div>
                 <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" name="email" class="form-control" id='email' ng-model='email' ng-blur='validate(email)' required>
+                  <span class='spanError' ng-show='signupForm.email.$touched && signupForm.email.$invalid'>Please enter email address</span>
+                </div>
+                <div class="form-group">
                   <label for="password">Password:</label>
-                  <input type="password" class='form-control' name="password" id="password" ng-model='password' ng-blur='validate(password)' required>
+                  <input type="password" class='form-control' name="password" id="password" ng-model='password' ng-change='passwordStrengthValidation(password)' ng-blur='validate(password)' required>
+                  <span class="glyphicon glyphicon-minus" ng-class="{yellow:strength>30,orange:strength>60,green:strength>95}"></span>
+                  <span class="glyphicon glyphicon-minus" ng-class="{orange:strength>60,green:strength>95}"></span>
+                  <span class="glyphicon glyphicon-minus" ng-class="{green:strength>95}"></span>
                   <span class='spanError' ng-show='signupForm.password.$touched && signupForm.password.$invalid'>Please enter password</span>
                 </div>
                 <div class="form-group">
@@ -81,16 +89,18 @@
                   <span class='spanError' ng-show='signupForm.confirmPassword.$touched && signupForm.confirmPassword.$invalid'>Please enter your password again</span>
                 </div>
                 <div class="form-group">
-                  <label for="email">Email:</label>
-                  <input type="email" name="email" class="form-control" id='email' ng-model='email' ng-blur='validate(email)' required>
-                  <span class='spanError' ng-show='signupForm.email.$touched && signupForm.email.$invalid'>Please enter email address</span>
-                </div>
-                <div class="form-group">
                   <label for="DOB">Date Of Birth:</label>
                   <input type="date" name="DOB" class='form-control' id="DOB" ng-model='DOB' ng-blur='validate(DOB)' required>
                   <span class='spanError' ng-show='signupForm.DOB.$touched && signupForm.DOB.$invalid'>Please set your DOB</span>
                 </div>
-                <input type="submit" class='btn btn-default' disabled name="Kickoff"  value='Kickoff' ng-click='Signup()'>
+                <div class=row>
+                    <div class='col-md-8'>
+                       <input type="submit" id='kickoff' class='btn btn-default'  ng-disabled="signupForm.$invalid" name="Kickoff"  value='Kickoff' ng-click='Signup()'>
+                    </div>
+                    <div class='col-md-4'>
+                      <a href="#" ng-click='Signup()'>Back to login</a>
+                    </div>
+                </div>
               </div>
           </form>
         </div>
