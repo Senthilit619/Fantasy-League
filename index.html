@@ -18,18 +18,18 @@
   <!-- Font for the website-->
   <link href="https://fonts.googleapis.com/css?family=Dosis:300,400|Fresca|Neuton:800|Paytone+One" rel="stylesheet">
   <!-- CSS for login page-->
-  <link href='CSS/Login.css' rel='stylesheet'>
-  <script src='JS/app.js'></script>
+  <link href='Login.css' rel='stylesheet'>
+  <script src='app.js'></script>
 </head>
 <body class='Background'>
   <div class='container' ng-controller='Login-Controller'>
     <div class='row Login-div'>
       <div class="col-sm-6 col-md-8 col8">
-        <img class='img-responsive' src="cover.png" alt="cover">
+        <img class='img-responsive' src="Images/cover.png" alt="cover">
       </div>
       <div ng-if=kickoffLogin>
         <div class="col-sm-6 col-md-4 loginForm-class">
-            <form name='loginForm'>
+            <form name='loginForm' method="post" action="login">
                 <div class="form-group">
                   <label for="username">Username:</label>
                   <input type="text" class='form-control' name="username" id="username" ng-model=username required>
