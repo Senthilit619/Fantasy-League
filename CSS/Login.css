@@ -5,7 +5,7 @@
 
 .Login-div {
       margin-top: 100px;
-      height: 450px;
+      height: 500px;
       background-color: #cbcaca;
 }
 
@@ -31,13 +31,13 @@ button[id='login-button']:hover{
   transform: translateX(5px);
 }
 
-input[id='kickoff']{
+button[id='kickoff']{
   width: 60px;
   border-radius: 30px;
   transition: 0.4s;
 }
 
-input[id='kickoff']:hover{
+button[id='kickoff']:hover{
   width: 60px;
   border-radius: 30px;
   transform: translateX(5px);
@@ -99,3 +99,20 @@ button[id='googleSignup']:hover{
   color:green;
 }
 
+.alert{
+  margin-top: 3px;
+  padding: 5px 15px;
+  height: 30px;
+}
+
+a .text{
+  font-family: 'Dosis';
+  font-weight: bold;
+  font-size: 16px;
+  color: #007acc;
+}
+a:hover{
+  color:#005c99;
+  text-decoration: none;
+
+}
