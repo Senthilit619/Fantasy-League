@@ -3,7 +3,7 @@ var mongo = require('./JS/mongo.js');
 var MongoClient = require('mongodb').MongoClient;
 var express = require("express");
 var app     = express();
-app.listen(3000);
+app.listen(4000);
 var path    = require("path");
 app.use(express.static('CSS'));
 app.use(express.static('JS'));
@@ -16,15 +16,12 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
  
-//Variables
-var l_name,l_password;
-
 //Routes
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
   //__dirname : It will resolve to your project folder.
 });
-// POST /login gets urlencoded bodies 
+// POST /login 
 app.post('/login', urlencodedParser, function (req, res) {
   if (!req.body) 
   	return res.sendStatus(400)
@@ -32,21 +29,24 @@ app.post('/login', urlencodedParser, function (req, res) {
   l_password=req.body.password;
   mongo.authenticateUser(l_name,l_password);
 });
-console.log("Connected to the server");
-// Connect to the db
-MongoClient.connect("mongodb://senthilit:rafanadal619@ds123312.mlab.com:23312/football_fantasy", function(err, db) {
-  if(err) {
-    console.log("We are connected to Mlab");
-  }
-  else{
-  	 console.log(db);
-  	db.collection('UserDetails').insertOne({"name":"Lewandowski"},function(err,data){
-  		if(err){
-  			console.log("asd");
-  		}
-  		else{
-  			console.log("Success");
-  		}
-  	});
-  }
+
+//POST Signup User
+app.post('/signup', urlencodedParser, function (req, res) {
+  if (!req.body) 
+    return res.sendStatus(400)
+  s_name = req.body.username;
+  s_password = req.body.password;
+  s_email = req.body.email;
+  s_dob = req.body.dob;
+  mongo.signupUser(s_name,s_password,s_email,s_dob);
+  return res.redirect('/');
 });
+
+app.get('/checkavailability',function(req,res){
+  var name=req.query.name;
+  mongo.checkUsername(name,function(data,err){
+    console.log("Result:"+data+"Err:"+err);
+    res.json(data);
+  });
+})
+console.log("Connected to the server");

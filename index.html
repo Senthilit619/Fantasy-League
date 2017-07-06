@@ -19,15 +19,24 @@
   <link href="https://fonts.googleapis.com/css?family=Dosis:300,400|Fresca|Neuton:800|Paytone+One" rel="stylesheet">
   <!-- CSS for login page-->
   <link href='Login.css' rel='stylesheet'>
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+  <script src="https://use.fontawesome.com/cd47ed83ce.js"></script>
   <script src='app.js'></script>
 </head>
 <body class='Background'>
   <div class='container' ng-controller='Login-Controller'>
     <div class='row Login-div'>
       <div class="col-sm-6 col-md-8 col8">
-        <img class='img-responsive' src="Images/cover.png" alt="cover">
-      </div>
-      <div ng-if=kickoffLogin>
+        <div class="media">
+           <div class="media-left">
+              <img class='img-responsive' src="Images/cover.png" alt="cover" width="200px" height="200px">
+           </div>
+        <div class="media-body">
+            <h4 class="media-heading" ng-click="display(username)">Media heading</h4>
+        </div>            
+        </div>  
+    </div>
+      <div ng-show=kickoffLogin>
         <div class="col-sm-6 col-md-4 loginForm-class">
             <form name='loginForm' method="post" action="login">
                 <div class="form-group">
@@ -45,7 +54,7 @@
                       <button type="submit" class='btn btn-default' id='login-button' name="Login">Login</button>
                   </div>
                   <div class="col-xs-4 col-sm-6 col-md-5">
-                      <a href="#" ng-click='Signup()'><i><strong>Yet to Kick-Off?</strong></i></a>
+                      <a href="#" ng-click='Signup()'><span class="text">Yet to Kick-Off?</span></a>
                   </div>
                 </div>
                 <div class="row">
@@ -61,13 +70,15 @@
             </form>
         </div>
       </div>
-      <div ng-if=kickoffSignup>
+      <div ng-show=kickoffSignup>
         <div class="col-sm-6 col-md-4 signupForm-class">
-          <form name='signupForm'>
+          <form name='signupForm' action="signup" method="post">
               <div class="form-group">
                 <div class="form-group">
-                  <label for="username">Username:</label>
-                  <input type="text" class='form-control' name="username" id="username" ng-model='username' ng-blur='validate(username)' required>
+                  <label for="username" >Username:</label>
+                  <input type="text" class='form-control' name="username" id="username" ng-model='username' ng-blur='validate(username)' ng-change="checkAvailability(username,signupForm)" ng-class="{'alert-success':availability,'alert-danger': not_availability}" required>
+                  <i class="fa fa-spinner fa-pulse fa-1x fa-fw" ng-if="loading"></i>
+                  <div class="alert" ng-if="availability||not_availability" ng-class="{'alert-success':availability,'alert-danger': not_availability}">{{availability_message}}</div>
                   <span class='spanError' ng-show='signupForm.username.$touched && signupForm.username.$invalid'>Please enter username</span>
                 </div>
                 <div class="form-group">
@@ -77,28 +88,28 @@
                 </div>
                 <div class="form-group">
                   <label for="password">Password:</label>
-                  <input type="password"  onfocus="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" title="Password should start with uppercase followed by lowercase alphabets and number" class='form-control' name="password" id="password" ng-model='password' ng-change='passwordStrengthValidation(password)' ng-blur='validate(password)' required>
+                  <input type="password"  onfocus="$(this).tooltip('show')" data-toggle="tooltip" data-placement="left" title="Password should start with uppercase followed by lowercase alphabets and number" class='form-control' name="password" id="password" ng-model='password' ng-change='passwordStrengthValidation(password)' ng-blur="passwordValidation(password); passwordConfirmation(password,confirmPassword)"required>
                   <span class="glyphicon glyphicon-minus" ng-show="signupForm.password.$dirty" ng-class="{yellow:strength>30,orange:strength>60,green:strength>95}"></span>
                   <span class="glyphicon glyphicon-minus" ng-show="signupForm.password.$dirty" ng-class="{orange:strength>60,green:strength>95}"></span>
                   <span class="glyphicon glyphicon-minus" ng-show="signupForm.password.$dirty" ng-class="{green:strength>95}"></span>
-                  <span class='spanError' ng-show='signupForm.password.$touched && signupForm.password.$invalid'>Please enter password</span>
+                  <div class="alert alert-danger" ng-show="validate_message" role="alert">{{validate_message}}</div>
                 </div>
                 <div class="form-group">
                   <label for="confirmPassword">Confirm Password:</label>
-                  <input type="password" class='form-control' name="confirmPassword" id="confirmPassword" ng-model='confirmPassword' ng-blur='validate(confirmPassword)' required>
-                  <span class='spanError' ng-show='signupForm.confirmPassword.$touched && signupForm.confirmPassword.$invalid'>Please enter your password again</span>
+                  <input type="text" class='form-control' name="confirmPassword" id="confirmPassword" ng-model='confirmPassword' ng-blur='passwordConfirmation(password,confirmPassword,signupForm);validateForm(signupForm)' required>
+                  <div class="alert alert-danger" ng-show="confirm_message" role="alert">Passwords do not match</div>
                 </div>
                 <div class="form-group">
                   <label for="DOB">Date Of Birth:</label>
-                  <input type="date" name="DOB" class='form-control' id="DOB" ng-model='DOB' ng-blur='validate(DOB)' required>
+                  <input type="date" name="dob" class='form-control' id="DOB" ng-model='DOB' ng-change='validateForm(signupForm)' required>
                   <span class='spanError' ng-show='signupForm.DOB.$touched && signupForm.DOB.$invalid'>Please set your DOB</span>
                 </div>
                 <div class=row>
                     <div class='col-xs-8 col-sm-8 col-md-8'>
-                       <input type="submit" id='kickoff' class='btn btn-default'  ng-disabled="signupForm.$invalid" name="Kickoff"  value='Kickoff' ng-click='Signup()'>
+                       <button type="submit" id='kickoff' class='btn btn-default'  ng-disabled="signupForm.$invalid" name="Kickoff"  value='Kickoff' ng-click='Signup()'>Kickoff</button>
                     </div>
                     <div class='col-xs-4 col-sm-4 col-md-4'>
-                      <a href="#" ng-click='Signup()'>Back to login</a>
+                      <a href="#" ng-click='Signup(loginForm)'><span class="text">Back to login</span></a>
                     </div>
                 </div>
               </div>
