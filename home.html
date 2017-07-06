@@ -22,7 +22,7 @@
     <script src='JS/home.js'></script>
 	<script src="http://www.webglearth.com/v2/api.js"></script>
 	<script>
-      
+
     </script>
   </head>
   <body onload="initialize()" ng-controller='homeCtrl'>
@@ -50,7 +50,7 @@
           </ul>
         </div>
       </div>
-	  <div id="container" class="container-fluid">
+	  <div id="container" ng-style="{'height':windowHeight,'width':windowWidth}" class="container-fluid">
 		<div id="left-door">
 			<button id="left-open-btn" class="btn btn-primary" onclick="opendoor()">Lets</button>
 		</div>
@@ -60,17 +60,31 @@
 		<header>
 			<h1 class='text-center'>Fantasy Football League</h1>
 		</header>
-		<div id="main">				
+		<div id="main">
 			<div id="map-container" class='col-md-4'>
 					<div id="earth_div" style="width:400px;height:400px;background-image:url('Assets/Images/stars.jpg');"></div>
 				</div>
 			<div class='col-md-4'>
 				<div id="club-container">
+            <ul class="squadList">
+              <li ng-repeat='x in playersData' class='singlePlayerName' ng-click='displayPlayerSlot(x.name)'>{{x.name}}</li>
+            </ul>
 				</div>
 			</div>
 			<div class='col-md-4'>
 				<div id="squad-container">
-					<p>The correct colours are: According to French Embassy in Germany, the blue stripe is Pantone Reflex Blue and the red stripe is Pantone 032, which equals to RGB (0,85,164), (255,255,255) and (239,65,53) respectively, or #0055A4, #FFFFFF, #EF4135.</p>
+          <img class='ground-img' src="Assets/Images/ground.jpg" alt="pitch">
+          <div class="one fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="two fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="three fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="four fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="five fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="six fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="seven fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="eight fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="nine fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="ten fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
+          <div class="eleven fieldNames" ng-click='fillPlayerSlot()'>{{nameOfPlayer}}</div>
 				</div>
 			</div>
 		</div>

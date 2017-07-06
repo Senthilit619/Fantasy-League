@@ -46,7 +46,7 @@ function initialize() {
 var temp='haua';
 
 var home = angular.module('home',[]);
-home.controller('homeCtrl',function($scope,$rootScope){
+home.controller('homeCtrl',function($scope,$http,$rootScope){
 	$rootScope.locations=[{url:'Assets/Images/england.jpg',country:"England",lat:54.100933,lon:-1.699097},
 						  {url:'Assets/Images/spain.jpg',country:'Spain',lat:40.403177,lon:-4.098099},
 						  {url:'Assets/Images/germany.jpg',country:'Germany',lat:50.869342,lon:10.184663},
@@ -58,9 +58,21 @@ home.controller('homeCtrl',function($scope,$rootScope){
 				earth.setView([$rootScope.locations[i].lat, $rootScope.locations[i].lon], 4.8);
 			}
 		}
-		
 	}
+  $rootScope.windowHeight=$(window).height();
+  $rootScope.windowWidth=$(window).width();
+  console.log($rootScope.windowWidth);
+  $http.get('https://jsonplaceholder.typicode.com/users').then(function(response){
+    $scope.playersData=response.data;
+    // for(var i=0;i<response.data.length;i++){
+    //       console.log(response.data.name);
+    // }
+  });
+  $scope.displayPlayerSlot=function(playerName){
+    $rootScope.playerName=playerName;
+  }
 
-
-
+  $scope.fillPlayerSlot=function(){
+    $scope.nameOfPlayer=$rootScope.playerName;
+  }
 });
