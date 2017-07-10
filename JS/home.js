@@ -47,11 +47,11 @@ var temp='haua';
 
 var home = angular.module('home',[]);
 home.controller('homeCtrl',function($scope,$http,$rootScope){
-	$rootScope.locations=[{url:'Assets/Images/england.jpg',country:"England",lat:54.100933,lon:-1.699097},
-						  {url:'Assets/Images/spain.jpg',country:'Spain',lat:40.403177,lon:-4.098099},
-						  {url:'Assets/Images/germany.jpg',country:'Germany',lat:50.869342,lon:10.184663},
-						  {url:'Assets/Images/france.jpg',country:'France',lat:46.849884,lon:2.411787},
-						  {url:'Assets/Images/italy.jpg',country:'Italy',lat:42.272805,lon:13.055542}];
+	$rootScope.locations=[{url:'Images/england.jpg',country:"England",lat:54.100933,lon:-1.699097},
+						  {url:'Images/spain.jpg',country:'Spain',lat:40.403177,lon:-4.098099},
+						  {url:'Images/germany.jpg',country:'Germany',lat:50.869342,lon:10.184663},
+						  {url:'Images/france.jpg',country:'France',lat:46.849884,lon:2.411787},
+						  {url:'Images/italy.jpg',country:'Italy',lat:42.272805,lon:13.055542}];
 	$scope.transformMap = function(countryName){
 		for (var i=0;i<$rootScope.locations.length;i++){
 			if($rootScope.locations[i].country==countryName){

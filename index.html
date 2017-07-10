@@ -39,6 +39,7 @@
       <div ng-show=kickoffLogin>
         <div class="col-sm-6 col-md-4 loginForm-class">
             <form name='loginForm' method="post" action="login">
+                <div id="loginError" class="alert alert-danger" ng-if="loginError">{{loginError}}</div>
                 <div class="form-group">
                   <label for="username">Username:</label>
                   <input type="text" class='form-control' name="username" id="username" ng-model=username required>
@@ -51,7 +52,7 @@
                 </div>
                 <div class="row">
                   <div class="col-xs-8 col-sm-6 col-md-7">
-                      <button type="submit" class='btn btn-default' id='login-button' name="Login">Login</button>
+                      <button ng-click="login(username,password)" type="submit" class='btn btn-default' id='login-button' name="Login">Login</button>
                   </div>
                   <div class="col-xs-4 col-sm-6 col-md-5">
                       <a href="#" ng-click='Signup()'><span class="text">Yet to Kick-Off?</span></a>

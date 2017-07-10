@@ -12,10 +12,23 @@ app.controller('Login-Controller',function($scope,$rootScope,$http){
   $rootScope.availability=null;
   $rootScope.not_availability=null;
   $rootScope.loading=null;
+  $scope.loginError=null;
 
   $scope.display = function(name){
     console.log(name);
   }
+  $scope.login = function(name,password){
+    $http.post("login",{params:{"name":name,"password":password}}).then(function(response){
+      console.log("Inside angular function"+name);
+      console.log(response.data);
+      if(response.data.length==0){
+        $scope.loginError="Invalid Login Credentials";
+      }
+    },function(err){
+      console.log(err);
+    });
+  }
+
   $scope.checkAvailability = function(name,form){
     console.log("Checking availability");
     $rootScope.loading=true;

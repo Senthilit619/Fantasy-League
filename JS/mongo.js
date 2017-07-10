@@ -12,16 +12,14 @@ MongoClient.connect("mongodb://senthilit:rafanadal619@ds123312.mlab.com:23312/fo
 
 //Login User 
 var exports=module.exports;
-exports.authenticateUser = function(l_name,l_password){
+exports.authenticateUser = function(l_name,l_password,callback){
 	console.log("Authenticating User");
-  	mongoobj.db.collection('UserDetails').insert({"name": l_name,"password":l_password},function(err,data){
+  	mongoobj.db.collection('UserDetails').find({"name": l_name,"password":l_password}).toArray(function(err,data){
   		if(err){
-  			console.log("Invalid Login");
+  			console.log("Error logging in. Try Again");
   		}
-  		else{
-  			console.log("inserted the user");
-  			console.log(data);
-  		}
+  		else 
+        callback("asd");
   	});
 }
 //Signup User -Add new User

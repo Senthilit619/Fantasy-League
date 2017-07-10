@@ -27,7 +27,13 @@ app.post('/login', urlencodedParser, function (req, res) {
   	return res.sendStatus(400)
   l_name=req.body.username;
   l_password=req.body.password;
-  mongo.authenticateUser(l_name,l_password);
+  console.log(l_name+l_password);
+  mongo.authenticateUser(l_name,l_password,function(data){
+    // if(data != '')
+    //   res.sendFile(path.join(__dirname+'/home.html'));
+    // else if(data=="asd")
+      res.status(data);
+  });
 });
 
 //POST Signup User
@@ -41,6 +47,7 @@ app.post('/signup', urlencodedParser, function (req, res) {
   mongo.signupUser(s_name,s_password,s_email,s_dob);
   return res.redirect('/');
 });
+//7092386547
 
 app.get('/checkavailability',function(req,res){
   var name=req.query.name;
